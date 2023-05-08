@@ -1,0 +1,78 @@
+version: "3.8"
+services:
+  fronted_users:
+    depends_on:
+      - api
+    build:
+      context: ./frontend_users
+      target: prod
+    ports:
+      - "3000:80"
+    networks:
+      - docker_exemple_network
+  fronted_admin:
+    depends_on:
+      - api
+    build:
+      context: ./frontend_admin
+      target: prod
+    ports:
+      - "3001:80"
+    networks:
+      - docker_exemple_network
+  api:
+    container_name: dockerexempleapi
+    depends_on:
+      - db
+    build:
+      context: ./api
+      target: prod
+    ports:
+      - "5000:5000"
+    networks:
+      - docker_exemple_network
+  products_api:
+    container_name: dockerexempleproductsapi
+    depends_on:
+      - db_products
+    build:
+      context: ./product_api
+    ports:
+      - "5001:80"
+    networks:
+      - docker_exemple_network
+  db:
+    image: postgres:13.7
+    container_name: dockerexempledb
+    environment:
+      - POSTGRES_DB=docker_app
+      - POSTGRES_USER=bartapp
+      - POSTGRES_PASSWORD=Myriamelenajeremy24!
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - db-data:/var/lib/postgresql/data/pgdata
+    networks:
+      - docker_exemple_network
+    ports:
+      - "5433:5432"
+  db_products:
+    image: postgres:13.7
+    container_name: dockerexempledbproducts
+    environment:
+      - POSTGRES_DB=docker_app_products
+      - POSTGRES_USER=bartapp
+      - POSTGRES_PASSWORD=Myriamelenajeremy24!
+      - PGDATA=/var/lib/postgresql/data/pgdata
+    volumes:
+      - db_products-data:/var/lib/postgresql/data/pgdata
+      - ./product_api/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    networks:
+      - docker_exemple_network
+    ports:
+      - "5434:5432"
+volumes:
+  db-data:
+  db_products-data:
+networks:
+  docker_exemple_network:
+    name: docker_exemple_network

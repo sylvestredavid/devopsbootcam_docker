@@ -1,0 +1,16 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL9Dialect
+
+  datasource:
+    url: jdbc:postgresql://dockerexempledb:5432/docker_app
+    username: bartapp
+    password: Myriamelenajeremy24!
+
+server:
+  port: 5000

@@ -1,0 +1,10 @@
+.container{
+    width: fit-content;
+    margin: auto;
+    padding-top: 10px;
+}
+
+.rightBtn {
+    display: flex;
+    justify-content: flex-end;
+}
