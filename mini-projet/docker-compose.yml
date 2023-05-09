@@ -11,9 +11,16 @@ services:
       - PASSWORD=python
     volumes:
       - ./website:/var/www/html
+    networks:
+      - student-list-network
   api:
-    image: simpleapi
+    image: simple_api
+    container_name: mini-projet-api
     ports:
       - "5000:5000"
     volumes:
       - ./simple_api/student_age.json:/data/student_age.json
+    networks:
+      - student-list-network
+networks:
+  student-list-network:
