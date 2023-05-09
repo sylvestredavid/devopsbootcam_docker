@@ -1,5 +1,6 @@
 version: "3.8"
 services:
+  # Frontends
   fronted_users:
     depends_on:
       - api
@@ -20,6 +21,7 @@ services:
       - "3001:80"
     networks:
       - docker_exemple_network
+  # apis
   api:
     container_name: dockerexempleapi
     depends_on:
@@ -41,6 +43,7 @@ services:
       - "5001:80"
     networks:
       - docker_exemple_network
+  # databases
   db:
     image: postgres:13.7
     container_name: dockerexempledb

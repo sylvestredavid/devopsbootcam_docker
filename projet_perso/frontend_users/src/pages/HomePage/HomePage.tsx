@@ -7,6 +7,7 @@ import {
     Empty as AntdEmpty,
 } from "antd";
 import {ProductModel} from "../../models/ProductModel";
+import './HomePage.css'
 
 const HomePage: React.FC = () => {
 
@@ -52,27 +53,34 @@ const HomePage: React.FC = () => {
             title: 'Prix',
             dataIndex: 'price',
             key: 'price',
+            render: (value: number) => <p>{value / 100}€</p>
         },
     ];
 
     return (
         <>
-            <Table locale={{
-                emptyText: <AntdEmpty
-                    image={AntdEmpty.PRESENTED_IMAGE_SIMPLE}
-                    description={'Aucun résultat trouvé'}
-                />
-            }}
-                   dataSource={users}
-                   columns={columns} size="middle"/>
-            <Table locale={{
-                emptyText: <AntdEmpty
-                    image={AntdEmpty.PRESENTED_IMAGE_SIMPLE}
-                    description={'Aucun résultat trouvé'}
-                />
-            }}
-                   dataSource={products}
-                   columns={productsColumns} size="middle"/>
+            <div className="container">
+                <h1>Users</h1>
+                <Table locale={{
+                    emptyText: <AntdEmpty
+                        image={AntdEmpty.PRESENTED_IMAGE_SIMPLE}
+                        description={'Aucun résultat trouvé'}
+                    />
+                }}
+                       dataSource={users}
+                       columns={columns} size="middle"/>
+            </div>
+            <div className="container">
+                <h1>Products</h1>
+                <Table locale={{
+                    emptyText: <AntdEmpty
+                        image={AntdEmpty.PRESENTED_IMAGE_SIMPLE}
+                        description={'Aucun résultat trouvé'}
+                    />
+                }}
+                       dataSource={products}
+                       columns={productsColumns} size="middle"/>
+            </div>
         </>
     )
 }
