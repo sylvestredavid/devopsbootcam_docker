@@ -47,10 +47,10 @@ services:
   db:
     image: postgres:13.7
     container_name: dockerexempledb
+    env_file:
+      - .env
     environment:
       - POSTGRES_DB=docker_app
-      - POSTGRES_USER=bartapp
-      - POSTGRES_PASSWORD=Myriamelenajeremy24!
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - db-data:/var/lib/postgresql/data/pgdata
@@ -61,10 +61,10 @@ services:
   db_products:
     image: postgres:13.7
     container_name: dockerexempledbproducts
+    env_file:
+      - .env
     environment:
       - POSTGRES_DB=docker_app_products
-      - POSTGRES_USER=bartapp
-      - POSTGRES_PASSWORD=Myriamelenajeremy24!
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
       - db_products-data:/var/lib/postgresql/data/pgdata
