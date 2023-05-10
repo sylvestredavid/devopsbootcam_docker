@@ -6,9 +6,8 @@ services:
       - api
     ports:
       - "80:80"
-    environment:
-      - USERNAME=toto
-      - PASSWORD=python
+    env_file:
+      - .env
     volumes:
       - ./website:/var/www/html
     networks:

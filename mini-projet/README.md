@@ -62,7 +62,7 @@ Le docker-compose va générer 2 conteneurs, un pour le website et un pour l'api
 - Le conteneur pour le website est basé sur l'image `php:apache`.
 - Il dépend du conteneur *api* ce qui signifie qu'il ne sera lancé qu'une fois que ce dernier sera up.
 - Il est branché sur le port 80 de la machine hôte
-- on a également définit 2 variables d'environement *USERNAME* et *PASSWORD* dont le website a besoin pour appeler l'api
+- on a également définit 2 variables d'environement *USERNAME* et *PASSWORD*, dans le fichier .env qui sera appelé grace à la clé `env_file` (à noter que normalement, le fichier .env ne devrait pas etre sur github)
 - Un volume de type bind-mount est créé pour synchronisé le dossier website de la machine hôte au dossier /var/www/html du conteneur
 - Enfin il est placé dans un network *student-list-network* avec le conteneur api afin que le website puisse communiquer avec l'api
 
