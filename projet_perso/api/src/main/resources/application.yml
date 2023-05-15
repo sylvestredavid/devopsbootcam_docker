@@ -8,9 +8,9 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQL9Dialect
 
   datasource:
-    url: jdbc:postgresql://dockerexempledb:5432/docker_app
-    username: bartapp
-    password: Myriamelenajeremy24!
+    url: ${SPRING_DATASOURCE_URL}
+    username: ${SPRING_DATASOURCE_USERNAME}
+    password: ${SPRING_DATASOURCE_USERNAME}
 
 server:
   port: 5000
