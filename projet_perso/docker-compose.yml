@@ -41,6 +41,8 @@ services:
       - db_products
     build:
       context: ./product_api
+    env_file:
+      - ./product_api/.env
     ports:
       - "5001:80"
     networks:

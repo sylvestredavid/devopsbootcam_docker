@@ -4,7 +4,7 @@ COPY . .
 RUN cd /app && gradle build
 
 FROM openjdk:11-jre-slim as prod
-ENV SPRING_DATASOURCE_URL=''
+ENV SPRING_DATABASE_NAME=''
 ENV SPRING_DATASOURCE_USERNAME=''
 ENV SPRING_DATASOURCE_PASSWORD=''
 COPY --from=builder /app/build/libs/api.jar api.jar

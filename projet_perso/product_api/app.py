@@ -1,14 +1,19 @@
 from flask import Flask, request, jsonify
 import psycopg2
+import os
 from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
 
+PRODUCT_DATABASE_NAME = os.environ.get('PRODUCT_DATABASE_NAME')
+PRODUCT_DATASOURCE_USERNAME = os.environ.get('PRODUCT_DATASOURCE_USERNAME')
+PRODUCT_DATASOURCE_PASSWORD = os.environ.get('PRODUCT_DATASOURCE_PASSWORD')
+
 
 @app.route('/products', methods=['GET'])
 def get_all_products():
-    conn = psycopg2.connect("postgresql://bartapp:Myriamelenajeremy24!@dockerexempledbproducts:5432/docker_app_products")
+    conn = psycopg2.connect(f"postgresql://{PRODUCT_DATASOURCE_USERNAME}:{PRODUCT_DATASOURCE_PASSWORD}@dockerexempledbproducts:5432/{PRODUCT_DATABASE_NAME}")
     # Open a cursor to perform database operations
     cur = conn.cursor()
 
@@ -30,7 +35,7 @@ def get_all_products():
 @app.route('/products/create', methods=['POST'])
 def create_product():
     data = request.json
-    conn = psycopg2.connect("postgresql://bartapp:Myriamelenajeremy24!@dockerexempledbproducts:5432/docker_app_products")
+    conn = psycopg2.connect(f"postgresql://{PRODUCT_DATASOURCE_USERNAME}:{PRODUCT_DATASOURCE_PASSWORD}@dockerexempledbproducts:5432/{PRODUCT_DATABASE_NAME}")
     cur = conn.cursor()
     cur.execute("""INSERT INTO products (id, name, image_url, price)
                 VALUES((SELECT uuid_in(md5(random()::text || random()::text)::cstring)), %s, %s, %s)""",

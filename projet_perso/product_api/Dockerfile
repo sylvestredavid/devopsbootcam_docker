@@ -11,6 +11,10 @@ COPY . .
 RUN apt-get -y update
 RUN pip3 install -r requirements.txt
 
+ENV PRODUCT_DATABASE_NAME=''
+ENV PRODUCT_DATASOURCE_USERNAME=''
+ENV PRODUCT_DATASOURCE_PASSWORD=''
+
 # Expose the required port
 EXPOSE 80
 
