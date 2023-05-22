@@ -12,6 +12,7 @@ services:
       - ./website:/var/www/html
     networks:
       - student-list-network
+
   api:
     image: simple_api
     container_name: mini-projet-api
@@ -21,5 +22,31 @@ services:
       - ./simple_api/student_age.json:/data/student_age.json
     networks:
       - student-list-network
+
+  registry:
+    container_name: registry
+    networks:
+      - registry
+    ports:
+      - '9500:5000'
+    image: registry:2
+
+  registry-ui:
+    depends_on:
+      - registry
+    image: joxit/docker-registry-ui
+    ports:
+      - "8080:80"
+    networks:
+      - registry
+    environment:
+      - REGISTRY_URL="http://registry:5000"
+      - REGISTRY_TITLE="BOOTCAMP 13"
+      - NGINX_PROXY_PASS_URL=http://registry:5000
+      - SINGLE_REGISTRY=true
+      - DELETE_IMAGES=true
+      - CATALOG_ELEMENTS_LIMIT=10
+
 networks:
   student-list-network:
+  registry:
